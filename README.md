@@ -12,8 +12,10 @@ POSTGRES_USER=user
 POSTGRES_PASSWORD=password
 ```
 
-### To install and run:
+### To install:
 `./install.sh`
+### To run:
+`./run.sh`
 
 ### To remove:
 `docker stop jenkins`
