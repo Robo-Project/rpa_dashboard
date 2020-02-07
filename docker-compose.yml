@@ -1,0 +1,30 @@
+version: '3.5'
+
+services:
+    grafana:
+        container_name: grafana
+        image: roboteam/custom-grafana
+        restart: unless-stopped
+        ports:
+            - 3000:3000
+        environment:
+            - GF_PANELS_DISABLE_SANITIZE_HTML=true
+
+    postgres:
+        container_name: postgres
+        image: postgres:alpine
+        restart: unless-stopped
+        privileged: true
+        volumes:
+            - rpa_database:/var/lib/postgresql/data:z
+            - ./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+        environment:
+            TZ: 'Europe/Helsinki'
+            PGTZ: 'Europe/Helsinki'
+        env_file:
+            - postgres/database.env
+        ports:
+            - 5432:5432
+
+volumes:
+    rpa_database:
