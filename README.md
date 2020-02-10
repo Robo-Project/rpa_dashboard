@@ -13,19 +13,9 @@ POSTGRES_PASSWORD=password
 
 ### To configure Grafana
 Connect to localhost:3000, log in with username `admin` and password `admin`. Change the admin password.
-add USER and PASSWORD variables to the `environment/grafana.env` file:
-```
-GF_USER=username (admin normally)
-GF_PASSWORD=yourSelectedPassword
-```
-Update Grafana data sources and dashboard by running an update script:
-`./update_dashboard.sh`
+Go to `Configuration -> Data Sources -> PostgreSQL` and change Database, User and Password to match the ones you use. Set SSL Mode to `disable`
 
-If you modify grafana dashboard or data sources, export them by running a get script:
-`./get_dashboard.sh`
-
-The data sources and dashboard are saved to `grafana` directory.
+If you modify grafana dashboard and want to save it, click `Save dashboard` from Dashboard view, copy the JSON and copy it to path `grafana/dashboards`
 
 ### To run:
-docker-compose build
 docker-compose up

@@ -4,11 +4,12 @@ services:
 
     grafana:
         container_name: grafana
-        image: grafana/grafana
+        build: grafana/
         restart: unless-stopped
         ports:
             - 3000:3000
         environment:
+            - GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-simple-json-datasource
             - GF_PANELS_DISABLE_SANITIZE_HTML=true
 
     postgres:

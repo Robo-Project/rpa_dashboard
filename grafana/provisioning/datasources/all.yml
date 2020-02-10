@@ -1,0 +1,9 @@
+datasources:
+- access: 'proxy'
+  name: 'PostgreSQL'
+  type: 'postgres'
+  org_id: 1
+  url: '172.18.0.1:5432'
+  is_default: true
+  version: 12
+  editable: true

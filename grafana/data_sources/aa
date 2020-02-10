@@ -1,1 +1,0 @@
-{"id":2,"orgId":1,"name":"PostgreSQL","type":"postgres","typeLogoUrl":"public/app/plugins/datasource/postgres/img/postgresql_logo.svg","access":"proxy","url":"172.18.0.1:5432","password":"","user":"","database":"","basicAuth":false,"isDefault":true,"jsonData":{"postgresVersion":1200,"sslmode":"disable"},"readOnly":false}
