@@ -3,7 +3,7 @@ version: '3.5'
 services:
     grafana:
         container_name: grafana
-        image: roboteam/custom-grafana
+        image: grafana/grafana
         restart: unless-stopped
         ports:
             - 3000:3000
@@ -22,7 +22,7 @@ services:
             TZ: 'Europe/Helsinki'
             PGTZ: 'Europe/Helsinki'
         env_file:
-            - postgres/database.env
+            - environment/postgres.env
         ports:
             - 5432:5432
 
