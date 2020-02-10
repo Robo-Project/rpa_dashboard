@@ -1,6 +1,7 @@
 version: '3.5'
 
 services:
+
     grafana:
         container_name: grafana
         image: grafana/grafana
@@ -17,7 +18,6 @@ services:
         privileged: true
         volumes:
             - rpa_database:/var/lib/postgresql/data:z
-            - ./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
         environment:
             TZ: 'Europe/Helsinki'
             PGTZ: 'Europe/Helsinki'
@@ -26,5 +26,45 @@ services:
         ports:
             - 5432:5432
 
+    jenkins_docker:
+        container_name: jenkins-docker
+        image: docker:dind
+        privileged: true
+        volumes:
+            - jenkins-docker-certs:/certs/client
+            - jenkins-data:/var/jenkins_home
+        environment:
+            - DOCKER_TLS_CERTDIR=/certs
+        networks:
+          jenkins:
+            aliases:
+              - docker
+        ports:
+            - 2376:2376
+
+    jenkins:
+        container_name: custom_jenkins
+        build: jenkins/
+        restart: unless-stopped
+        depends_on:
+          - jenkins_docker
+        volumes:
+            - jenkins-data:/var/jenkins_home
+            - jenkins-docker-certs:/certs/client:ro
+        environment:
+            - DOCKER_HOST=tcp://docker:2376
+            - DOCKER_CERT_PATH=/certs/client
+            - DOCKER_TLS_VERIFY=1
+        networks:
+            - jenkins
+        ports:
+            - 8080:8080
+            - 50000:50000
+
 volumes:
     rpa_database:
+    jenkins-data:
+    jenkins-docker-certs:
+
+networks:
+    jenkins:

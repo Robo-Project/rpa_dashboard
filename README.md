@@ -23,5 +23,9 @@ Update Grafana data sources and dashboard by running an update script:
 
 If you modify grafana dashboard or data sources, export them by running a get script:
 `./get_dashboard.sh`
+
 The data sources and dashboard are saved to `grafana` directory.
 
+### To run:
+docker-compose build
+docker-compose up
