@@ -12,10 +12,9 @@ POSTGRES_USER=user
 POSTGRES_PASSWORD=password
 ```
 
-### To install:
-`./install.sh`
 ### To run:
-`./run.sh`
+docker-compose build
+docker-compose up
 
 ### To remove:
 `docker stop jenkins`
