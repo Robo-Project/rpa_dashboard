@@ -1,11 +1,7 @@
 # RPA_Dashboard
 
 ### Before install:
-Create postgres directory:
-`mkdir postgres`
-Create file 'database.env' to postgres directory:
-`touch postgres/database.env`
-Add the following lines to database.env, choose database name, user and password (don't use defaults):
+If you want to add username and password to postgress add the following lines to database.env, choose database name, user and password (don't use defaults):
 ```
 POSTGRES_DB=databasename
 POSTGRES_USER=user
