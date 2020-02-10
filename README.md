@@ -1,7 +1,7 @@
 # RPA_Dashboard
 
 ### To configure Jenkins
-Connect to localhost:8080, choose `Create new` and then write up a job name. Choose `multibranch pipeline` and click `ok`. Under `Branch sources`, choose `add source` and select `github`. Add github url (ex. https://github.com/tumajote/robotest2) and scroll to bottom to save.
+Connect to localhost:8080, choose `Create new` and then write up a job name. Choose `multibranch pipeline` and click `ok`. Under `Branch sources`, choose `add source` and select `github`. Add github url (ex. https://github.com/Robo-Project/Robotest1) and scroll to bottom to save.
 
 ### To configure Postgres
 If you want to add username and password to postgres add the following lines to `environment/postgres.env`, choose database name, user and password (don't use defaults):
