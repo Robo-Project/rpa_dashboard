@@ -7,3 +7,5 @@ datasources:
   is_default: true
   version: 12
   editable: true
+  user: 'postgres'
+  database: 'postgres'
