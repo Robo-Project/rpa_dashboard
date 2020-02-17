@@ -77,7 +77,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  CASE WHEN status = 'PASS' THEN 1 ELSE 0 END AS \"now\",\n  name AS \"name\",\n  EXTRACT(epoch FROM finished_at) AS \"time\"\nFROM test_status\n  JOIN tests ON tests.id=test_status.test_id\n  JOIN test_runs ON test_runs.id=test_status.test_run_id\n",
+          "rawSql": "SELECT\n  CASE WHEN status = 'PASS' THEN 1 ELSE 0 END AS \"now\",\n  name AS \"name\",\n  EXTRACT(epoch FROM finished_at) AS \"time\"\nFROM test_status\n  JOIN tests ON tests.id=test_status.test_id\n  JOIN test_runs ON test_runs.id=test_status.test_run_id\n  \n",
           "refId": "A",
           "select": [
             [
@@ -162,12 +162,328 @@
     },
     {
       "cacheTimeout": null,
+      "cards": {
+        "cardPadding": null,
+        "cardRound": null
+      },
+      "color": {
+        "cardColor": "#b4ff00",
+        "colorScale": "sqrt",
+        "colorScheme": "interpolateOranges",
+        "exponent": 0.5,
+        "mode": "spectrum"
+      },
+      "dataFormat": "timeseries",
       "datasource": "PostgreSQL",
       "gridPos": {
         "h": 8,
         "w": 12,
         "x": 12,
         "y": 0
+      },
+      "heatmap": {},
+      "hideZeroBuckets": false,
+      "highlightCards": true,
+      "id": 10,
+      "legend": {
+        "show": false
+      },
+      "links": [],
+      "options": {},
+      "pluginVersion": "6.6.1",
+      "reverseYBuckets": false,
+      "targets": [
+        {
+          "format": "table",
+          "group": [],
+          "metricColumn": "name",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  started_at AS \"time\",\n  elapsed\nFROM test_run_status\n  JOIN test_runs ON test_runs.id=test_run_status.test_run_id \n  ",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "elapsed"
+                ],
+                "type": "column"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "test_run_id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "test_run_status",
+          "timeColumn": "elapsed",
+          "timeColumnType": "int4",
+          "where": [
+            {
+              "name": "$__unixEpochFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Elapsed time of jobs",
+      "tooltip": {
+        "show": true,
+        "showHistogram": false
+      },
+      "type": "heatmap",
+      "xAxis": {
+        "show": true
+      },
+      "xBucketNumber": null,
+      "xBucketSize": null,
+      "yAxis": {
+        "decimals": null,
+        "format": "ms",
+        "logBase": 1,
+        "max": null,
+        "min": null,
+        "show": true,
+        "splitFactor": null
+      },
+      "yBucketBound": "auto",
+      "yBucketNumber": null,
+      "yBucketSize": null
+    },
+    {
+      "cacheTimeout": null,
+      "datasource": "PostgreSQL",
+      "gridPos": {
+        "h": 6,
+        "w": 8,
+        "x": 0,
+        "y": 8
+      },
+      "id": 2,
+      "links": [],
+      "options": {
+        "fieldOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "id": 0,
+                "op": "=",
+                "text": "N/A",
+                "type": 1,
+                "value": "null"
+              }
+            ],
+            "max": 100,
+            "min": 0,
+            "nullValueMode": "connected",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": [],
+          "values": false
+        },
+        "orientation": "horizontal",
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "6.6.1",
+      "targets": [
+        {
+          "format": "table",
+          "group": [
+            {
+              "params": [
+                "$__interval",
+                "none"
+              ],
+              "type": "time"
+            }
+          ],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  count(id) AS \"id\"\nFROM test_status\n",
+          "refId": "C",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "count"
+                ],
+                "type": "aggregate"
+              },
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "table": "tasks",
+          "timeColumn": "id",
+          "timeColumnType": "int4",
+          "where": [
+            {
+              "name": "",
+              "params": [
+                "value",
+                "=",
+                "name"
+              ],
+              "type": "expression"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Job count",
+      "type": "gauge"
+    },
+    {
+      "cacheTimeout": null,
+      "datasource": "PostgreSQL",
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 8,
+        "y": 8
+      },
+      "id": 12,
+      "links": [],
+      "options": {
+        "colorMode": "value",
+        "fieldOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "defaults": {
+            "mappings": [
+              {
+                "id": 0,
+                "op": "=",
+                "text": "N/A",
+                "type": 1,
+                "value": "null"
+              }
+            ],
+            "nullValueMode": "connected",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "ms"
+          },
+          "overrides": [],
+          "values": false
+        },
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "horizontal"
+      },
+      "pluginVersion": "6.6.1",
+      "targets": [
+        {
+          "format": "table",
+          "group": [
+            {
+              "params": [
+                "$__interval",
+                "none"
+              ],
+              "type": "time"
+            }
+          ],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  avg(elapsed) AS \"elapsed\"\nFROM test_run_status\n",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "elapsed"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "avg"
+                ],
+                "type": "aggregate"
+              },
+              {
+                "params": [
+                  "elapsed"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "table": "test_run_status",
+          "timeColumn": "id",
+          "timeColumnType": "int4",
+          "where": [
+            {
+              "name": "$__unixEpochFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Average time /task run",
+      "type": "stat"
+    },
+    {
+      "cacheTimeout": null,
+      "datasource": "PostgreSQL",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 8
       },
       "id": 6,
       "links": [],
@@ -178,26 +494,33 @@
             "mean"
           ],
           "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
             "mappings": [],
             "max": 100,
             "min": 0,
-            "thresholds": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
           },
-          "override": {},
+          "overrides": [],
           "values": false
         },
-        "orientation": "vertical"
+        "orientation": "vertical",
+        "showUnfilled": true
       },
-      "pluginVersion": "6.5.2",
+      "pluginVersion": "6.6.1",
       "targets": [
         {
           "format": "table",
@@ -260,121 +583,13 @@
       "type": "bargauge"
     },
     {
-      "cacheTimeout": null,
-      "datasource": "PostgreSQL",
-      "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 0,
-        "y": 8
-      },
-      "id": 2,
-      "links": [],
-      "options": {
-        "fieldOptions": {
-          "calcs": [
-            "mean"
-          ],
-          "defaults": {
-            "mappings": [
-              {
-                "id": 0,
-                "op": "=",
-                "text": "N/A",
-                "type": 1,
-                "value": "null"
-              }
-            ],
-            "max": 100,
-            "min": 0,
-            "nullValueMode": "connected",
-            "thresholds": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ],
-            "unit": "none"
-          },
-          "override": {},
-          "values": false
-        },
-        "orientation": "horizontal",
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true
-      },
-      "pluginVersion": "6.5.2",
-      "targets": [
-        {
-          "format": "table",
-          "group": [
-            {
-              "params": [
-                "$__interval",
-                "none"
-              ],
-              "type": "time"
-            }
-          ],
-          "metricColumn": "none",
-          "rawQuery": true,
-          "rawSql": "SELECT\n  count(id) AS \"id\"\nFROM test_status\n",
-          "refId": "C",
-          "select": [
-            [
-              {
-                "params": [
-                  "id"
-                ],
-                "type": "column"
-              },
-              {
-                "params": [
-                  "count"
-                ],
-                "type": "aggregate"
-              },
-              {
-                "params": [
-                  "id"
-                ],
-                "type": "alias"
-              }
-            ]
-          ],
-          "table": "tasks",
-          "timeColumn": "id",
-          "timeColumnType": "int4",
-          "where": [
-            {
-              "name": "",
-              "params": [
-                "value",
-                "=",
-                "name"
-              ],
-              "type": "expression"
-            }
-          ]
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Job count",
-      "type": "gauge"
-    },
-    {
-      "content": "<form method=\"post\" action=\"http://auto:11b7e78cf15023998e7f070540444f6d2b@localhost:8080/job/Robotest1/build\" class=\"inline\" target=\"_blank\">\n  <button style=\"background: #222222;\n  cursor: pointer;\n  font-size: 1em;\n  font-family: serif;\" type=\"submit\" name=\"submit_param\" value=\"submit_value\" class=\"link-button\">\n    This is a link that sends a POST request\n  </button>\n</form>",
+      "content": "<form method=\"post\" action=\"http://localhost:8080/job/WikiSearch/job/master/build?SEARCH=Leonardo\" class=\"inline\" target=\"_blank\">\n  <button style=\"background: #222222;\n  cursor: pointer;\n  font-size: 1em;\n  font-family: serif;\" type=\"submit\" name=\"submit_param\" value=\"submit_value\" class=\"link-button\">\n    This is a link that sends a POST request\n  </button>\n</form>",
       "datasource": null,
       "gridPos": {
         "h": 8,
         "w": 12,
-        "x": 12,
-        "y": 8
+        "x": 0,
+        "y": 14
       },
       "id": 8,
       "mode": "html",
@@ -413,8 +628,8 @@
       "type": "text"
     }
   ],
-  "refresh": false,
-  "schemaVersion": 21,
+  "refresh": "5s",
+  "schemaVersion": 22,
   "style": "dark",
   "tags": [],
   "templating": {
