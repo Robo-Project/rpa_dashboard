@@ -20,4 +20,4 @@ Go to `Configuration -> Data Sources -> PostgreSQL` and change Database, User an
 
 If you modify grafana dashboard and want to save it, click `Save dashboard` from Dashboard view, copy the JSON and copy it to path `grafana/dashboards`
 
-On RPA Board, edit tasks and add correct jenkins job name to the path. (replace "RoboJob" with your job name)
+On RPA Board, edit tasks and add correct jenkins job names to the path (replace the previous ones).

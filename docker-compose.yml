@@ -71,8 +71,6 @@ services:
         depends_on:
             - grafana
             - jenkins
-            - jenkins_docker
-            - postgres
 
 volumes:
     rpa_database:
