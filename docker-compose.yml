@@ -60,6 +60,20 @@ services:
             - 8080:8080
             - 50000:50000
 
+    nginx-proxy:
+        container_name: nginx
+        image: jwilder/nginx-proxy
+        ports:
+            - "80:80"
+        expose:
+            - "80"
+        volumes:
+            - /var/run/docker.sock:/tmp/docker.sock:ro
+            - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+        depends_on:
+            - grafana
+            - jenkins
+
 volumes:
     rpa_database:
     jenkins-data:

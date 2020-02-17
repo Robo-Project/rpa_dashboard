@@ -181,6 +181,7 @@
         "x": 12,
         "y": 0
       },
+
       "heatmap": {},
       "hideZeroBuckets": false,
       "highlightCards": true,
@@ -192,6 +193,42 @@
       "options": {},
       "pluginVersion": "6.6.1",
       "reverseYBuckets": false,
+      "id": 6,
+      "links": [],
+      "options": {
+        "displayMode": "lcd",
+        "fieldOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "max": 100,
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": [],
+          "values": false
+        },
+        "orientation": "vertical",
+        "showUnfilled": true
+      },
+      "pluginVersion": "6.6.1",
       "targets": [
         {
           "format": "table",
@@ -479,6 +516,8 @@
     {
       "cacheTimeout": null,
       "datasource": "PostgreSQL",
+      "content": "<form method=\"post\" action=\"http://localhost:8080/job/Robotest1/job/master/build?delay=0sec\" class=\"inline\" target=\"_blank\">\n  <button style=\"background: #222222;\n  cursor: pointer;\n  font-size: 1em;\n  font-family: serif;\" type=\"submit\" name=\"submit_param\" value=\"submit_value\" class=\"link-button\">\n    This is a link who calls build in job named Robotest1\n  </button>\n</form>\n<form method=\"post\" action=\"http://localhost:8080/job/WikiSearch/job/master/buildWithParameters?SEARCH=Kissa&delay=0sec\" class=\"inline\" target=\"_blank\">\n  <button style=\"background: #222222;\n  cursor: pointer;\n  font-size: 1em;\n  font-family: serif;\" type=\"submit\" name=\"submit_param\" value=\"submit_value\" class=\"link-button\">\n    This is a link who calls build in job named WikiSearch with parameter Kissa\n  </button>\n</form>",
+      "datasource": null,
       "gridPos": {
         "h": 8,
         "w": 12,
