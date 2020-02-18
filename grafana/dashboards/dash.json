@@ -30,6 +30,219 @@
   "links": [],
   "panels": [
     {
+      "cards": {
+        "cardPadding": null,
+        "cardRound": null
+      },
+      "color": {
+        "cardColor": "#b4ff00",
+        "colorScale": "sqrt",
+        "colorScheme": "interpolateOranges",
+        "exponent": 0.5,
+        "mode": "spectrum"
+      },
+      "dataFormat": "timeseries",
+      "datasource": "PostgreSQL",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "heatmap": {},
+      "hideZeroBuckets": false,
+      "highlightCards": true,
+      "id": 14,
+      "legend": {
+        "show": false
+      },
+      "options": {},
+      "reverseYBuckets": false,
+      "targets": [
+        {
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  started_at AS \"time\",\n  elapsed\nFROM test_run_status\n  JOIN test_runs ON test_runs.id=test_run_status.test_run_id",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "elapsed"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "test_run_status",
+          "timeColumn": "elapsed",
+          "timeColumnType": "int4",
+          "where": [
+            {
+              "name": "$__unixEpochFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Panel Title",
+      "tooltip": {
+        "show": true,
+        "showHistogram": false
+      },
+      "type": "heatmap",
+      "xAxis": {
+        "show": true
+      },
+      "xBucketNumber": null,
+      "xBucketSize": null,
+      "yAxis": {
+        "decimals": null,
+        "format": "ms",
+        "logBase": 1,
+        "max": null,
+        "min": null,
+        "show": true,
+        "splitFactor": null
+      },
+      "yBucketBound": "auto",
+      "yBucketNumber": null,
+      "yBucketSize": null
+    },
+    {
+      "cacheTimeout": null,
+      "cards": {
+        "cardPadding": null,
+        "cardRound": null
+      },
+      "color": {
+        "cardColor": "#b4ff00",
+        "colorScale": "sqrt",
+        "colorScheme": "interpolateOranges",
+        "exponent": 0.5,
+        "mode": "spectrum"
+      },
+      "dataFormat": "timeseries",
+      "datasource": "PostgreSQL",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "heatmap": {},
+      "hideZeroBuckets": false,
+      "highlightCards": true,
+      "id": 6,
+      "legend": {
+        "show": false
+      },
+      "links": [],
+      "options": {
+        "displayMode": "lcd",
+        "fieldOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "max": 100,
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": [],
+          "values": false
+        },
+        "orientation": "vertical",
+        "showUnfilled": true
+      },
+      "pluginVersion": "6.6.1",
+      "reverseYBuckets": false,
+      "targets": [
+        {
+          "format": "table",
+          "group": [],
+          "metricColumn": "name",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  started_at AS \"time\",\n  elapsed\nFROM test_run_status\n  JOIN test_runs ON test_runs.id=test_run_status.test_run_id \n  ",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "elapsed"
+                ],
+                "type": "column"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "test_run_id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "test_run_status",
+          "timeColumn": "elapsed",
+          "timeColumnType": "int4",
+          "where": [
+            {
+              "name": "$__unixEpochFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Elapsed time of jobs",
+      "tooltip": {
+        "show": true,
+        "showHistogram": false
+      },
+      "type": "heatmap",
+      "xAxis": {
+        "show": true
+      },
+      "xBucketNumber": null,
+      "xBucketSize": null,
+      "yAxis": {
+        "decimals": null,
+        "format": "ms",
+        "logBase": 1,
+        "max": null,
+        "min": null,
+        "show": true,
+        "splitFactor": null
+      },
+      "yBucketBound": "auto",
+      "yBucketNumber": null,
+      "yBucketSize": null
+    },
+    {
       "aliasColors": {},
       "bars": false,
       "cacheTimeout": null,
@@ -42,7 +255,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 0
+        "y": 8
       },
       "hiddenSeries": false,
       "id": 4,
@@ -162,37 +375,14 @@
     },
     {
       "cacheTimeout": null,
-      "cards": {
-        "cardPadding": null,
-        "cardRound": null
-      },
-      "color": {
-        "cardColor": "#b4ff00",
-        "colorScale": "sqrt",
-        "colorScheme": "interpolateOranges",
-        "exponent": 0.5,
-        "mode": "spectrum"
-      },
-      "dataFormat": "timeseries",
-      "datasource": "PostgreSQL",
+      "content": "<form method=\"post\" action=\"http://localhost:8080/job/Robotest1/job/master/build?delay=0sec\" class=\"inline\" target=\"_blank\">\n  <button style=\"background: #222222;\n  cursor: pointer;\n  font-size: 1em;\n  font-family: serif;\" type=\"submit\" name=\"submit_param\" value=\"submit_value\" class=\"link-button\">\n    This is a link who calls build in job named Robotest1\n  </button>\n</form>\n<form method=\"post\" action=\"http://localhost:8080/job/WikiSearch/job/master/buildWithParameters?SEARCH=Kissa&delay=0sec\" class=\"inline\" target=\"_blank\">\n  <button style=\"background: #222222;\n  cursor: pointer;\n  font-size: 1em;\n  font-family: serif;\" type=\"submit\" name=\"submit_param\" value=\"submit_value\" class=\"link-button\">\n    This is a link who calls build in job named WikiSearch with parameter Kissa\n  </button>\n</form>",
+      "datasource": null,
       "gridPos": {
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 0
+        "y": 8
       },
-
-      "heatmap": {},
-      "hideZeroBuckets": false,
-      "highlightCards": true,
-      "id": 10,
-      "legend": {
-        "show": false
-      },
-      "links": [],
-      "options": {},
-      "pluginVersion": "6.6.1",
-      "reverseYBuckets": false,
       "id": 6,
       "links": [],
       "options": {
@@ -233,30 +423,22 @@
         {
           "format": "table",
           "group": [],
-          "metricColumn": "name",
+          "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  started_at AS \"time\",\n  elapsed\nFROM test_run_status\n  JOIN test_runs ON test_runs.id=test_run_status.test_run_id \n  ",
+          "rawSql": "SELECT\n  count(name)\nFROM tests\n  JOIN test_status ON tests.id=test_status.test_id\nWHERE\n  CASE WHEN status = 'PASS' THEN 1 ELSE 0 END = 1",
           "refId": "A",
           "select": [
             [
               {
                 "params": [
-                  "elapsed"
-                ],
-                "type": "column"
-              }
-            ],
-            [
-              {
-                "params": [
-                  "test_run_id"
+                  "id"
                 ],
                 "type": "column"
               }
             ]
           ],
-          "table": "test_run_status",
-          "timeColumn": "elapsed",
+          "table": "tasks",
+          "timeColumn": "id",
           "timeColumnType": "int4",
           "where": [
             {
@@ -265,33 +447,38 @@
               "type": "macro"
             }
           ]
+        },
+        {
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  count(name) AS \"succ\"\nFROM tests\n  JOIN test_status ON tests.id=test_status.test_id\nWHERE\n  CASE WHEN status = 'FAIL' THEN 1 ELSE 0 END = 1",
+          "refId": "B",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "timeColumn": "time",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
         }
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Elapsed time of jobs",
-      "tooltip": {
-        "show": true,
-        "showHistogram": false
-      },
-      "type": "heatmap",
-      "xAxis": {
-        "show": true
-      },
-      "xBucketNumber": null,
-      "xBucketSize": null,
-      "yAxis": {
-        "decimals": null,
-        "format": "ms",
-        "logBase": 1,
-        "max": null,
-        "min": null,
-        "show": true,
-        "splitFactor": null
-      },
-      "yBucketBound": "auto",
-      "yBucketNumber": null,
-      "yBucketSize": null
+      "title": "Success /failed",
+      "type": "bargauge"
     },
     {
       "cacheTimeout": null,
@@ -300,7 +487,7 @@
         "h": 6,
         "w": 8,
         "x": 0,
-        "y": 8
+        "y": 16
       },
       "id": 2,
       "links": [],
@@ -414,7 +601,7 @@
         "h": 4,
         "w": 4,
         "x": 8,
-        "y": 8
+        "y": 16
       },
       "id": 12,
       "links": [],
@@ -514,121 +701,13 @@
       "type": "stat"
     },
     {
-      "cacheTimeout": null,
-      "datasource": "PostgreSQL",
-      "content": "<form method=\"post\" action=\"http://localhost:8080/job/Robotest1/job/master/build?delay=0sec\" class=\"inline\" target=\"_blank\">\n  <button style=\"background: #222222;\n  cursor: pointer;\n  font-size: 1em;\n  font-family: serif;\" type=\"submit\" name=\"submit_param\" value=\"submit_value\" class=\"link-button\">\n    This is a link who calls build in job named Robotest1\n  </button>\n</form>\n<form method=\"post\" action=\"http://localhost:8080/job/WikiSearch/job/master/buildWithParameters?SEARCH=Kissa&delay=0sec\" class=\"inline\" target=\"_blank\">\n  <button style=\"background: #222222;\n  cursor: pointer;\n  font-size: 1em;\n  font-family: serif;\" type=\"submit\" name=\"submit_param\" value=\"submit_value\" class=\"link-button\">\n    This is a link who calls build in job named WikiSearch with parameter Kissa\n  </button>\n</form>",
-      "datasource": null,
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 8
-      },
-      "id": 6,
-      "links": [],
-      "options": {
-        "displayMode": "lcd",
-        "fieldOptions": {
-          "calcs": [
-            "mean"
-          ],
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "mappings": [],
-            "max": 100,
-            "min": 0,
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            }
-          },
-          "overrides": [],
-          "values": false
-        },
-        "orientation": "vertical",
-        "showUnfilled": true
-      },
-      "pluginVersion": "6.6.1",
-      "targets": [
-        {
-          "format": "table",
-          "group": [],
-          "metricColumn": "none",
-          "rawQuery": true,
-          "rawSql": "SELECT\n  count(name)\nFROM tests\n  JOIN test_status ON tests.id=test_status.test_id\nWHERE\n  CASE WHEN status = 'PASS' THEN 1 ELSE 0 END = 1",
-          "refId": "A",
-          "select": [
-            [
-              {
-                "params": [
-                  "id"
-                ],
-                "type": "column"
-              }
-            ]
-          ],
-          "table": "tasks",
-          "timeColumn": "id",
-          "timeColumnType": "int4",
-          "where": [
-            {
-              "name": "$__unixEpochFilter",
-              "params": [],
-              "type": "macro"
-            }
-          ]
-        },
-        {
-          "format": "table",
-          "group": [],
-          "metricColumn": "none",
-          "rawQuery": true,
-          "rawSql": "SELECT\n  count(name) AS \"succ\"\nFROM tests\n  JOIN test_status ON tests.id=test_status.test_id\nWHERE\n  CASE WHEN status = 'FAIL' THEN 1 ELSE 0 END = 1",
-          "refId": "B",
-          "select": [
-            [
-              {
-                "params": [
-                  "value"
-                ],
-                "type": "column"
-              }
-            ]
-          ],
-          "timeColumn": "time",
-          "where": [
-            {
-              "name": "$__timeFilter",
-              "params": [],
-              "type": "macro"
-            }
-          ]
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Success /failed",
-      "type": "bargauge"
-    },
-    {
       "content": "<form method=\"post\" action=\"http://localhost:8080/job/WikiSearch/job/master/build?SEARCH=Leonardo\" class=\"inline\" target=\"_blank\">\n  <button style=\"background: #222222;\n  cursor: pointer;\n  font-size: 1em;\n  font-family: serif;\" type=\"submit\" name=\"submit_param\" value=\"submit_value\" class=\"link-button\">\n    This is a link that sends a POST request\n  </button>\n</form>",
       "datasource": null,
       "gridPos": {
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 14
+        "y": 22
       },
       "id": 8,
       "mode": "html",
