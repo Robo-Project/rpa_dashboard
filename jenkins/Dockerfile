@@ -11,7 +11,7 @@ RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/plugins.txt
 USER root
 RUN apt-get update \
     && apt-get install -qqy apt-transport-https ca-certificates curl gnupg2 software-properties-common \
-    python-pip libpq-dev \
+    python3-pip libpq-dev \
     && curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - \
     && add-apt-repository \
    "deb [arch=amd64] https://download.docker.com/linux/debian \
@@ -26,7 +26,7 @@ RUN apt-get update \
     && apt-get autoremove -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
-    && pip install dbbot-sqlalchemy psycopg2
+    && pip3 install dbbot-sqlalchemy psycopg2
 
 USER jenkins
 
