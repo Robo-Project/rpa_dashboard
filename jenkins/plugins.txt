@@ -1,3 +1,4 @@
+cors-filter
 #ace-editor
 #ant
 #antisamy-markup-formatter
