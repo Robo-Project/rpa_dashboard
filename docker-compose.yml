@@ -14,7 +14,7 @@ services:
 
     postgres:
         container_name: postgres
-        image: postgres:alpine
+        image: postgres:12.1-alpine
         restart: unless-stopped
         privileged: true
         volumes:
