@@ -28,7 +28,7 @@ services:
 
     jenkins_docker:
         container_name: jenkins-docker
-        image: docker:dind
+        image: docker:19-dind
         privileged: true
         volumes:
             - jenkins-docker-certs:/certs/client
@@ -64,7 +64,7 @@ services:
     nginx-proxy:
         container_name: nginx
         network_mode: host
-        image: jwilder/nginx-proxy
+        image: jwilder/nginx-proxy:alpine
         ports:
             - "80:80"
         expose:
