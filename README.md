@@ -8,7 +8,7 @@ Remember to also start jenkins-service and rpa_dashboard_frontend
 Connect to `localhost`. Log in to Grafana to view panels.
 
 ### To configure Jenkins
-Connect to localhost:8080, choose `Create new` and then write up a job name. Choose `multibranch pipeline` and click `ok`. Under `Branch sources`, choose `add source` and select `github`. Add github url (ex. https://github.com/Robo-Project/Robotest1) and scroll to bottom to save.
+Connect to localhost:8080, choose `Create new` and then write up a job name. Choose `multibranch pipeline` and click `ok`. Under `Branch sources`, choose `add source` and select `github`. Add github url (ex. https://github.com/Robo-Project/WikiSearch) and scroll to bottom to save.
 
 ### To configure Grafana
 Connect to localhost:3000, log in with username `admin` and password `admin`. Change the admin password.
