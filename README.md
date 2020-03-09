@@ -1,7 +1,7 @@
 # RPA_Dashboard
 
 ### To run:
-docker-compose up
+    docker-compose up
 
 Remember to also start jenkins-service and rpa_dashboard_frontend
 
