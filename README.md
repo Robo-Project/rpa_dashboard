@@ -3,7 +3,7 @@
 ### To run:
     docker-compose up
 
-Remember to also start jenkins-service and rpa_dashboard_frontend
+Remember to also start [jenkins-service](https://github.com/Robo-Project/jenkins-service) and [rpa_dashboard_frontend](https://github.com/Robo-Project/rpa_dashboard_frontend)
 
 Connect to `localhost`. Log in to Grafana to view panels.
 
