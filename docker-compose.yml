@@ -5,7 +5,7 @@ services:
     grafana:
         container_name: grafana
         network_mode: host
-        build: grafana/
+        image: roboteam/rpa_dashboard_grafana
         restart: unless-stopped
         ports:
             - 3000:3000
@@ -44,7 +44,7 @@ services:
 
     jenkins:
         container_name: jenkins
-        build: jenkins/
+        image: roboteam/rpa_dashboard_jenkins
         restart: unless-stopped
         depends_on:
           - jenkins_docker
@@ -64,20 +64,31 @@ services:
     nginx-proxy:
         container_name: nginx
         network_mode: host
-        image: jwilder/nginx-proxy:alpine
+        image: roboteam/rpa_dashboard_nginx
         ports:
             - "80:80"
         expose:
             - "80"
         volumes:
             - /var/run/docker.sock:/tmp/docker.sock:ro
-            - ./nginx/nginx.conf:/etc/nginx/nginx.conf
         depends_on:
             - jenkins
             - postgres
             - jenkins_docker
             - grafana
 
+    jenkins-service:
+        network_mode: host
+        container_name: jenkins-service-backend
+        image: roboteam/jenkins_service
+        ports:
+            - 4000:4000
+
+    watchtower:
+        image: containrrr/watchtower
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+            
 volumes:
     rpa_database:
     jenkins-data:

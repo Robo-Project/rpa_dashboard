@@ -1,9 +1,7 @@
 # RPA_Dashboard
 
 ### To run:
-docker-compose up
-
-Remember to also start jenkins-service and rpa_dashboard_frontend
+    docker-compose up
 
 Connect to `localhost`. Log in to Grafana to view panels.
 
@@ -11,9 +9,9 @@ Connect to `localhost`. Log in to Grafana to view panels.
 
 #### First login:
 Get password to unlock jenkins from console
- -> Connect to localhost
+ -> Connect to localhost:8080
  -> log in with unlock password
- -> press x in the windows top right corner, plugins are already installed
+ -> close the window by pressing 'x' in the top right corner, plugins are already installed
  
 #### Change admin password:
 Go to People
@@ -31,16 +29,24 @@ Manage Jenkins
  -> Save
 
 #### Create a job:
-Connect to localhost:8080, choose `Create new` and then write up a job name. Choose `multibranch pipeline` and click `ok`. Under `Branch sources`, choose `add source` and select `github`. Add github url (ex. https://github.com/Robo-Project/WikiSearch) and scroll to bottom to save.
+Go to front page of Jenkins
+ -> Create new
+ -> Write up a job name
+ -> Choose multibranch pipeline
+ -> Ok
+ -> Under 'Branch sources', choose 'add source' and select 'github'. Add github url (ex. https://github.com/Robo-Project/WikiSearch).
+ -> Save
 
 ### To configure Grafana
-Connect to localhost:3000, log in with username `admin` and password `admin`. Change the admin password.
-Go to `Configuration -> Data Sources -> PostgreSQL`. Set SSL Mode to `disable`.
-
-On RPA Board, edit tasks and add correct jenkins job name to correct one (replace the "Search" from url path).
+Connect to localhost
+ -> log in with username `admin` and password `admin`.
+ -> Change the admin password.
+ -> Configuration
+ -> Data Sources
+ -> PostgreSQL
+ -> Set SSL Mode to 'disable'.
 
 If you modify grafana dashboard and want to save it, click `Save dashboard` from Dashboard view, copy the JSON and copy it to path `grafana/dashboards/dash.json`
 
 ## To do
-
-Use API token to make the post to Jenkins from (front? back? grafana panel?)
+Use API/crumb token to make the post to Jenkins from grafana panel/back
