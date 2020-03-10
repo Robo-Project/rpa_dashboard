@@ -78,6 +78,18 @@ services:
             - jenkins_docker
             - grafana
 
+    jenkins-service:
+        network_mode: host
+        container_name: jenkins-service-backend
+        image: roboteam/jenkins_service
+        ports:
+            - 4000:4000
+
+    watchtower:
+        image: containrrr/watchtower
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+            
 volumes:
     rpa_database:
     jenkins-data:
