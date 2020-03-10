@@ -5,7 +5,7 @@ services:
     grafana:
         container_name: grafana
         network_mode: host
-        build: grafana/
+        image: roboteam/rpa_dashboard_grafana
         restart: unless-stopped
         ports:
             - 3000:3000
@@ -44,7 +44,7 @@ services:
 
     jenkins:
         container_name: custom_jenkins
-        build: jenkins/
+        image: roboteam/rpa_dashboard_jenkins
         restart: unless-stopped
         depends_on:
           - jenkins_docker
