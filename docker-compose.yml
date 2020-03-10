@@ -43,7 +43,7 @@ services:
             - 2376:2376
 
     jenkins:
-        container_name: custom_jenkins
+        container_name: jenkins
         build: jenkins/
         restart: unless-stopped
         depends_on:
