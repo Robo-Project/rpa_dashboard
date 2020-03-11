@@ -43,7 +43,7 @@ services:
             - 2376:2376
 
     jenkins:
-        container_name: custom_jenkins
+        container_name: jenkins
         image: roboteam/rpa_dashboard_jenkins
         restart: unless-stopped
         depends_on:
@@ -79,13 +79,14 @@ services:
 
     jenkins-service:
         network_mode: host
-        container_name: jenkins-service-backend
+        container_name: backend
         image: roboteam/jenkins_service
         ports:
             - 4000:4000
 
     watchtower:
         image: containrrr/watchtower
+        container_name: watchtower
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock
             
