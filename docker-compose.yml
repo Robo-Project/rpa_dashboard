@@ -9,9 +9,6 @@ services:
         restart: unless-stopped
         ports:
             - 3000:3000
-        environment:
-            - GF_PANELS_DISABLE_SANITIZE_HTML=true
-            - GF_SECURITY_ALLOW_EMBEDDING=true
 
     postgres:
         container_name: postgres
@@ -83,6 +80,8 @@ services:
         image: roboteam/jenkins_service
         ports:
             - 4000:4000
+        volumes:
+            - ./jenkins-api-token:/jenkins-api-token
 
     watchtower:
         image: containrrr/watchtower

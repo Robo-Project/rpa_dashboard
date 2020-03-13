@@ -25,10 +25,23 @@ Go to People
  -> Log in with new password
 ```
  
-#### Define Jenkins security:
-!! Skip this step for now, until API/Crumb token is implemented.
-Make sure there is selected 'Anyone can do anything'
+#### Create admin API-token:
+```
+Go to People
+  -> admin
+  -> Configure
+  -> API token
+    -> Add new Token
+  -> Enter any name
+  -> Generate
+  -> Copy token
+  -> Create new file to rpa_dashboard/jenkins-api-token
+  -> Write your credentials to file as <username>:<api-token>, such as 'admin:11003210391798127509a'
+  -> Make sure there is no extra lines in the file.
+  -> Save.
+```
 
+#### Define Jenkins security:
 ```
 Manage Jenkins
  -> Configure Global Security
