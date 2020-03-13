@@ -8,6 +8,8 @@ Connect to `localhost`. Log in to Grafana to view panels.
 ### To configure Jenkins
 
 #### First login:
+
+If you have previously used rpa_dashboard, make sure you clear all previous containers, volumes and images.
 ```
 Get password to unlock jenkins from console
  -> Connect to localhost:8080
@@ -35,10 +37,13 @@ Go to People
   -> Enter any name
   -> Generate
   -> Copy token
-  -> Create new file to rpa_dashboard/jenkins-api-token
+  -> Create new file 'jenkins-api-token' to rpa_dashboard root directory.
+  IMPORTANT: As this file is a volume in docker, docker might've created it already.
+  It has probably made it as a directory. So remove the directory and create the file.
+  You might need to take the containers down to do it.
   -> Write your credentials to file as <username>:<api-token>, such as 'admin:11003210391798127509a'
   -> Make sure there is no extra lines in the file.
-  -> Save.
+  -> Save the file.
 ```
 
 #### Define Jenkins security:
@@ -73,6 +78,3 @@ Connect to localhost
 ```
 
 If you modify grafana dashboard and want to save it, click `Save dashboard` from Dashboard view, copy the JSON and copy it to path `grafana/dashboards/dash.json`
-
-## To do
-Use API/crumb token to make the post to Jenkins from grafana panel/back
