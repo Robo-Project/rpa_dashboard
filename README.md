@@ -1,5 +1,16 @@
 # RPA_Dashboard
 
+### SETUP BEFORE FIRST RUN
+```
+Create file 'postgres.env' on rpa_dashboard root directory.
+ -> Write the database information on 3 lines to postgres.env:
+ POSTGRES_DB=<database_name>
+ POSTGRES_USER=<username>
+ POSTGRES_PASSWORD=<password>
+ -> save
+ You will need these later when configuring grafana
+```
+
 ### To run:
     docker-compose up
 
@@ -69,6 +80,7 @@ Connect to localhost
  -> Configuration
  -> Data Sources
  -> PostgreSQL
+ -> Set username, password and database to correct ones
  -> Set SSL Mode to 'disable'.
 ```
 

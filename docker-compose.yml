@@ -16,10 +16,12 @@ services:
         restart: unless-stopped
         privileged: true
         volumes:
-            - rpa_database:/var/lib/postgresql/data:z
+            - database:/var/lib/postgresql/data:z
         environment:
             TZ: 'Europe/Helsinki'
             PGTZ: 'Europe/Helsinki'
+        env_file:
+            - postgres.env
         ports:
             - 5432:5432
 
@@ -52,6 +54,8 @@ services:
             - DOCKER_HOST=tcp://docker:2376
             - DOCKER_CERT_PATH=/certs/client
             - DOCKER_TLS_VERIFY=1
+        env_file:
+            - postgres.env
         networks:
             - jenkins
         ports:
@@ -90,7 +94,7 @@ services:
             - /var/run/docker.sock:/var/run/docker.sock
             
 volumes:
-    rpa_database:
+    database:
     jenkins-data:
     jenkins-docker-certs:
 
