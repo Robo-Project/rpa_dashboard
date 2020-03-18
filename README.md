@@ -8,7 +8,9 @@ Create file 'postgres.env' on rpa_dashboard root directory.
  POSTGRES_USER=<username>
  POSTGRES_PASSWORD=<password>
  -> save
- You will need these later when configuring grafana
+ -> Change the file permissions to user read only:
+   chmod 400 postgres.env
+ You will also need these credentials later when configuring grafana
 ```
 
 ### To run:
