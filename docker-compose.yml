@@ -7,8 +7,8 @@ services:
         network_mode: host
         image: roboteam/rpa_dashboard_grafana
         restart: unless-stopped
-        ports:
-            - 3000:3000
+        expose:
+            - '3000'
 
     postgres:
         container_name: postgres
@@ -23,7 +23,7 @@ services:
         env_file:
             - postgres.env
         ports:
-            - 5432:5432
+            - '5432:5432'
 
     jenkins_docker:
         container_name: jenkins-docker
@@ -39,7 +39,7 @@ services:
             aliases:
               - docker
         ports:
-            - 2376:2376
+            - '2376:2376'
 
     jenkins:
         container_name: jenkins
@@ -59,19 +59,19 @@ services:
         networks:
             - jenkins
         ports:
-            - 8080:8080
-            - 50000:50000
+            - '8080:8080'
+            - '50000:50000'
 
     nginx-proxy:
         container_name: nginx
         network_mode: host
         image: roboteam/rpa_dashboard_nginx
         ports:
-            - "80:80"
-        expose:
-            - "80"
+            - '80:80'
+            - '443:443'
         volumes:
             - /var/run/docker.sock:/tmp/docker.sock:ro
+            - ./certs:/etc/nginx/certs
         depends_on:
             - jenkins
             - postgres
@@ -83,7 +83,7 @@ services:
         container_name: backend
         image: roboteam/jenkins_service
         ports:
-            - 4000:4000
+            - '4000:4000'
         volumes:
             - ./jenkins-api-token:/jenkins-api-token
 

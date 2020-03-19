@@ -2,6 +2,9 @@
 
 ### SETUP BEFORE FIRST RUN
 ```
+Create certificates for SSL by running this command:
+ -> certs/create_certs.sh
+
 Create file 'postgres.env' on rpa_dashboard root directory.
  -> Write the database information on 3 lines to postgres.env:
  POSTGRES_DB=<database_name>
@@ -30,8 +33,7 @@ Get password to unlock jenkins from console
  
 #### Change admin password:
 ```
-Go to People
- -> admin
+Click 'admin' in top-right corner
  -> Configure
  -> Input new password to 'Password' and 'Confirm Password' fields.
  -> Save
@@ -40,8 +42,7 @@ Go to People
  
 #### Create admin API-token:
 ```
-Go to People
-  -> admin
+Click 'admin' in top-right corner
   -> Configure
   -> API token
     -> Add new Token
