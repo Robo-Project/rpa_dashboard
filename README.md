@@ -12,6 +12,8 @@ Create file 'postgres.env' on rpa_dashboard root directory.
  POSTGRES_USER=<username>
  POSTGRES_PASSWORD=<password>
  -> save
+ -> Change the file permissions to user read only:
+   chmod 400 postgres.env
  You will need these later when configuring grafana
 
 Configure nginx
@@ -96,7 +98,6 @@ Connect to localhost
  -> Data Sources
  -> PostgreSQL
  -> Set username, password and database to correct ones
- -> Set SSL Mode to 'disable'.
 ```
 
 If you modify grafana dashboard and want to save it, click `Save dashboard` from Dashboard view, copy the JSON and copy it to path `grafana/dashboards/dash.json`
