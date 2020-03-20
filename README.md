@@ -12,6 +12,13 @@ Create file 'postgres.env' on rpa_dashboard root directory.
  POSTGRES_PASSWORD=<password>
  -> save
  You will need these later when configuring grafana
+
+Configure nginx path
+ For server:
+ -> Currently cannot do.
+ For localhost:
+ -> jenkins.localhost does not work unless you edit your '/etc/hosts' file.
+ -> change '127.0.0.1 localhost' to '127.0.0.1 *.localhost'
 ```
 
 ### To run:
