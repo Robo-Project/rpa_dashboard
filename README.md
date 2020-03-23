@@ -2,8 +2,9 @@
 
 ### SETUP BEFORE FIRST RUN
 ```
-Create certificates for SSL by running this command:
- -> certs/create_certs.sh
+Create certificates for SSL by running these commands:
+ -> cd certs
+ -> ./create_certs.sh
   If it doesn't work, make sure you have openssl installed and in your PATH.
 
 Create file 'postgres.env' on rpa_dashboard root directory.
