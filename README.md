@@ -4,6 +4,7 @@
 ```
 Create certificates for SSL by running this command:
  -> certs/create_certs.sh
+  If it doesn't work, make sure you have openssl installed and in your PATH.
 
 Create file 'postgres.env' on rpa_dashboard root directory.
  -> Write the database information on 3 lines to postgres.env:
@@ -13,13 +14,21 @@ Create file 'postgres.env' on rpa_dashboard root directory.
  -> save
  -> Change the file permissions to user read only:
    chmod 400 postgres.env
- You will also need these credentials later when configuring grafana
+ You will need these later when configuring grafana
+
+Configure nginx
+ For server outside local network:
+ -> edit 'nginx.conf' file
+ -> change all 'server_name' attributes to your domain name or ip-address.
+ For localhost:
+ -> jenkins.localhost does not work unless you edit your '/etc/hosts' file.
+ -> change '127.0.0.1 localhost' to '127.0.0.1 *.localhost'
 ```
 
 ### To run:
     docker-compose up
 
-Connect to `localhost`. Log in to Grafana to view panels.
+Connect to `localhost` or your domain root. Log in to Grafana to view panels.
 
 ### To configure Jenkins
 
@@ -28,7 +37,7 @@ Connect to `localhost`. Log in to Grafana to view panels.
 If you have previously used rpa_dashboard, make sure you clear all previous containers, volumes and images.
 ```
 Get password to unlock jenkins from console
- -> Connect to localhost:8080
+ -> Connect to jenkins.localhost (or jenkins.domain)
  -> log in with unlock password
  -> close the window by pressing 'x' in the top right corner, plugins are already installed
 ```
@@ -89,7 +98,6 @@ Connect to localhost
  -> Data Sources
  -> PostgreSQL
  -> Set username, password and database to correct ones
- -> Set SSL Mode to 'disable'.
 ```
 
 If you modify grafana dashboard and want to save it, click `Save dashboard` from Dashboard view, copy the JSON and copy it to path `grafana/dashboards/dash.json`
