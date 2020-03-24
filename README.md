@@ -24,6 +24,8 @@ Configure nginx
  For localhost:
  -> jenkins.localhost does not work unless you edit your '/etc/hosts' file.
  -> change '127.0.0.1 localhost' to '127.0.0.1 *.localhost'
+
+Create 'jenkins-api-token' file on rpa_dashboard root directory. Leave the file empty for now.
 ```
 
 ### To run:
