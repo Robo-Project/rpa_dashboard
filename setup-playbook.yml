@@ -9,6 +9,7 @@
       chdir: /robo-project/rpa_dashboard/certs
       creates: robo.crt
   - name: create jenkins api token file
+    become: yes
     file: 
-    path: /robo-project/rpa_dashboard/jenkins-api-token
-    state: touch
+      path: /robo-project/rpa_dashboard/jenkins-api-token
+      state: touch
