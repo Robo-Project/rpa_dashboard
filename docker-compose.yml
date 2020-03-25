@@ -7,8 +7,10 @@ services:
         network_mode: host
         image: roboteam/rpa_dashboard_grafana
         restart: unless-stopped
-        expose:
-            - '3000'
+        volumes:
+            - grafana-storage:/var/lib/grafana
+        ports:
+            - '3000:3000'
 
     postgres:
         container_name: postgres
@@ -98,6 +100,7 @@ volumes:
     database:
     jenkins-data:
     jenkins-docker-certs:
+    grafana-storage:
 
 networks:
     jenkins:
