@@ -1,0 +1,44 @@
+---
+- hosts: all  
+  gather_facts: no 
+  vars:
+    source_directory: ./rpa_dashboard
+    jenkins_url: jenkins.rpaboard.xyz 
+    grafana_url: www.rpaboard.xyz
+  tasks:
+  - name: Pull/Update repository
+    git:
+      repo: https://github.com/Robo-Project/rpa_dashboard.git
+      dest: "{{ source_directory }}"
+  - name: Generate certificates
+    shell: sh create_certs.sh 
+    args:
+      chdir: "{{ source_directory }}/certs"
+      creates: robo.crt
+  - name: Create postgres.env 
+    copy:
+      src: postgres.vault
+      dest: "{{ source_directory }}/postgres.env"
+      mode: '0400'
+  - name: Create jenkins api token file
+    file: 
+      path: "{{ source_directory }}/jenkins-api-token"
+      state: touch
+  - name: Create nginx configuration
+    template:
+      src: ./nginx.conf
+      dest: "{{ source_directory }}/nginx.conf"
+      mode: '0400'
+    when: ansible_host != '127.0.0.1'
+  - name: Create nginx configuration for localhost
+    vars:
+      jenkins_url: jenkins.localhost
+      grafana_url: localhost
+    template:
+      src: ./nginx.conf
+      dest: "{{ source_directory }}/nginx.conf"
+      mode: '0400'
+    when: ansible_host == '127.0.0.1'
+  - name: Run docker-compose up
+    docker_compose:
+      project_src: "{{ source_directory }}"
