@@ -7,7 +7,7 @@ Jenkins address 'jenkins.localhost' does not work unless you edit your '/etc/hos
 Inside /etc/hosts change '127.0.0.1 localhost' to '127.0.0.1 *.localhost'
 
 #### Setup with ansible
-Run all commands inside source directory
+Run all commands inside project directory
 
     # Setup to all servers defined in hosts.yml 
     ansible-playbook site.yml -i hosts.yml -u [username]`
