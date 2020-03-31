@@ -39,6 +39,3 @@
       dest: "{{ source_directory }}/nginx.conf"
       mode: '0400'
     when: ansible_host == '127.0.0.1'
-  - name: Run docker-compose up
-    docker_compose:
-      project_src: "{{ source_directory }}"
