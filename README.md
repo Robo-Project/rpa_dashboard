@@ -6,8 +6,10 @@
 Jenkins address 'jenkins.localhost' does not work unless you edit your '/etc/hosts' file.
 Inside /etc/hosts change '127.0.0.1 localhost' to '127.0.0.1 *.localhost'
 
+
 #### Setup with ansible
 Run all commands inside project directory
+
 
     # Setup to all servers defined in hosts.yml 
     ansible-playbook site.yml -i hosts.yml -u [username]`
@@ -41,7 +43,7 @@ Edit `postgres.vault` to your liking to change postgres login credentials. Befor
 
 If you have previously used rpa_dashboard, make sure you clear all previous containers, volumes and images.
 ```
-Get password to unlock jenkins from console
+Get password from console to unlock jenkins 
  -> Connect to jenkins.localhost (or jenkins.domain)
  -> log in with unlock password
  -> close the window by pressing 'x' in the top right corner, plugins are already installed

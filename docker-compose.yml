@@ -7,11 +7,14 @@ services:
         network_mode: host
         image: roboteam/rpa_dashboard_grafana
         restart: unless-stopped
-        expose:
-            - '3000'
+        volumes:
+            - grafana-storage:/var/lib/grafana
+        ports:
+            - '3000:3000'
 
     postgres:
         container_name: postgres
+        network_mode: host
         image: postgres:12.1-alpine
         restart: unless-stopped
         privileged: true
@@ -27,6 +30,7 @@ services:
 
     jenkins_docker:
         container_name: jenkins-docker
+        network_mode: host
         image: docker:19-dind
         privileged: true
         volumes:
@@ -34,30 +38,25 @@ services:
             - jenkins-data:/var/jenkins_home
         environment:
             - DOCKER_TLS_CERTDIR=/certs
-        networks:
-          jenkins:
-            aliases:
-              - docker
         ports:
             - '2376:2376'
 
     jenkins:
         container_name: jenkins
+        network_mode: host
         image: roboteam/rpa_dashboard_jenkins
         restart: unless-stopped
         depends_on:
-          - jenkins_docker
+            - jenkins_docker
         volumes:
             - jenkins-data:/var/jenkins_home
             - jenkins-docker-certs:/certs/client:ro
         environment:
-            - DOCKER_HOST=tcp://docker:2376
+            - DOCKER_HOST=tcp://localhost:2376
             - DOCKER_CERT_PATH=/certs/client
             - DOCKER_TLS_VERIFY=1
         env_file:
             - postgres.env
-        networks:
-            - jenkins
         ports:
             - '8080:8080'
             - '50000:50000'
@@ -73,6 +72,8 @@ services:
             - /var/run/docker.sock:/tmp/docker.sock:ro
             - ./certs:/etc/nginx/certs
             - ./nginx.conf:/etc/nginx/nginx.conf
+            - /var/log/nginx/access.log:/var/log/nginx/access.log
+            - /var/log/nginx/error.log:/var/log/nginx/error.log
         depends_on:
             - jenkins
             - postgres
@@ -98,6 +99,5 @@ volumes:
     database:
     jenkins-data:
     jenkins-docker-certs:
+    grafana-storage:
 
-networks:
-    jenkins:
