@@ -18,9 +18,11 @@ Create file 'postgres.env' on rpa_dashboard root directory.
  You will need these later when configuring grafana
 
 Configure nginx
+
  For server outside local network:
  -> edit 'nginx.conf' file
  -> change all 'server_name' attributes to your domain name or ip-address.
+ 
  For localhost:
  -> jenkins.localhost does not work unless you edit your '/etc/hosts' file.
  -> change '127.0.0.1 localhost' to '127.0.0.1 *.localhost'
@@ -39,7 +41,7 @@ Connect to `localhost` or your domain root. Log in to Grafana to view panels.
 
 If you have previously used rpa_dashboard, make sure you clear all previous containers, volumes and images.
 ```
-Get password to unlock jenkins from console
+Get password from console to unlock jenkins 
  -> Connect to jenkins.localhost (or jenkins.domain)
  -> log in with unlock password
  -> close the window by pressing 'x' in the top right corner, plugins are already installed
