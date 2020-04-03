@@ -28,22 +28,17 @@ After setup navigate to the source directory and run `docker-compose up`.
 
 Connect to `localhost` or your domain root. Log in to Grafana to view panels.
 
-### Changing the default credentials for postgres
+### Changing the default credentials for postgres and backend
 
-Edit `postgres.vault` to your liking to change postgres login credentials. Before deployment you should encrypt the file with ansible-vault.
+Edit `postgres.vault` and `backend.vault`* to your liking to change login credentials. Before deployment you should encrypt the files with ansible-vault.
 
     # encrypt file
     ansible-vault encrypt postgres.vault
+    ansible-vault encrypt backend.vault
     # deploy to all servers
     ansible-playbook site.yml -i hosts.yml --ask-vault-pass -u [username]`
 
-### To configure backend
-
-Edit `backend.env`. Set the following environment variables:
-  BACKTOKEN=something
-  BACKURL=your_backend_url
-BACKTOKEN is the token which is checked when connecting to backend.
-BACKURL is the url that is used to connect to backend from Grafana.
+* Do not edit lines with {{ variable }} declarations
 
 ### To configure Jenkins
 
