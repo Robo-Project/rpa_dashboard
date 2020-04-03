@@ -25,10 +25,6 @@
     file: 
       path: "{{ source_directory }}/jenkins-api-token"
       state: touch
-  - name: Create backend token and url file
-    file:
-      path: "{{ source_directory }}/backend.env"
-      state: touch
   - name: Create nginx configuration
     template:
       src: ./nginx.conf
@@ -43,5 +39,19 @@
     template:
       src: ./nginx.conf
       dest: "{{ source_directory }}/nginx.conf"
+      mode: '0400'
+    when: ansible_host == '127.0.0.1'
+  - name: Create backend configuration
+    template:
+      src: ./backend.vault
+      dest: "{{ source_directory }}/backend.env"
+      mode: '0400'
+    when: ansible_host != '127.0.0.1'
+  - name: Create backend configuration for localhost
+    vars:
+      backend_url: backend.localhost
+    template:
+      src: ./backend.vault
+      dest: "{{ source_directory }}/backend.env"
       mode: '0400'
     when: ansible_host == '127.0.0.1'
