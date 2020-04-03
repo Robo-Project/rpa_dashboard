@@ -4,7 +4,7 @@
 
 #### Localhost setup
 Jenkins address 'jenkins.localhost' does not work unless you edit your '/etc/hosts' file.
-Inside /etc/hosts change '127.0.0.1 localhost' to '127.0.0.1 *.localhost'
+Inside /etc/hosts add new line '127.0.0.1 *.localhost', if it doesn't exist yet
 
 
 #### Setup with ansible
@@ -28,14 +28,17 @@ After setup navigate to the source directory and run `docker-compose up`.
 
 Connect to `localhost` or your domain root. Log in to Grafana to view panels.
 
-### Changing the default credentials for postgres
+### Changing the default credentials for postgres and backend
 
-Edit `postgres.vault` to your liking to change postgres login credentials. Before deployment you should encrypt the file with ansible-vault.
+Edit `postgres.vault` and `backend.vault`* to your liking to change login credentials. Before deployment you should encrypt the files with ansible-vault.
 
     # encrypt file
     ansible-vault encrypt postgres.vault
+    ansible-vault encrypt backend.vault
     # deploy to all servers
     ansible-playbook site.yml -i hosts.yml --ask-vault-pass -u [username]`
+
+* Do not edit lines with {{ variable }} declarations
 
 ### To configure Jenkins
 

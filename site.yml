@@ -5,6 +5,7 @@
     source_directory: ./rpa_dashboard
     jenkins_url: jenkins.rpaboard.xyz 
     grafana_url: www.rpaboard.xyz
+    backend_url: backend.rpaboard.xyz
   tasks:
   - name: Pull/Update repository
     git:
@@ -34,8 +35,23 @@
     vars:
       jenkins_url: jenkins.localhost
       grafana_url: localhost
+      backend_url: backend.localhost
     template:
       src: ./nginx.conf
       dest: "{{ source_directory }}/nginx.conf"
+      mode: '0400'
+    when: ansible_host == '127.0.0.1'
+  - name: Create backend configuration
+    template:
+      src: ./backend.vault
+      dest: "{{ source_directory }}/backend.env"
+      mode: '0400'
+    when: ansible_host != '127.0.0.1'
+  - name: Create backend configuration for localhost
+    vars:
+      backend_url: backend.localhost
+    template:
+      src: ./backend.vault
+      dest: "{{ source_directory }}/backend.env"
       mode: '0400'
     when: ansible_host == '127.0.0.1'
