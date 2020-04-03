@@ -5,6 +5,7 @@
     source_directory: ./rpa_dashboard
     jenkins_url: jenkins.rpaboard.xyz 
     grafana_url: www.rpaboard.xyz
+    backend_url: backend.rpaboard.xyz
   tasks:
   - name: Pull/Update repository
     git:
@@ -24,6 +25,10 @@
     file: 
       path: "{{ source_directory }}/jenkins-api-token"
       state: touch
+  - name: Create backend token and url file
+    file:
+      path: "{{ source_directory }}/backend.env"
+      state: touch
   - name: Create nginx configuration
     template:
       src: ./nginx.conf
@@ -34,6 +39,7 @@
     vars:
       jenkins_url: jenkins.localhost
       grafana_url: localhost
+      backend_url: backend.localhost
     template:
       src: ./nginx.conf
       dest: "{{ source_directory }}/nginx.conf"

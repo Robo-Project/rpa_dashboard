@@ -4,7 +4,7 @@
 
 #### Localhost setup
 Jenkins address 'jenkins.localhost' does not work unless you edit your '/etc/hosts' file.
-Inside /etc/hosts change '127.0.0.1 localhost' to '127.0.0.1 *.localhost'
+Inside /etc/hosts add new line '127.0.0.1 *.localhost', if it doesn't exist yet
 
 
 #### Setup with ansible
@@ -36,6 +36,14 @@ Edit `postgres.vault` to your liking to change postgres login credentials. Befor
     ansible-vault encrypt postgres.vault
     # deploy to all servers
     ansible-playbook site.yml -i hosts.yml --ask-vault-pass -u [username]`
+
+### To configure backend
+
+Edit `backend.env`. Set the following environment variables:
+  BACKTOKEN=something
+  BACKURL=your_backend_url
+BACKTOKEN is the token which is checked when connecting to backend.
+BACKURL is the url that is used to connect to backend from Grafana.
 
 ### To configure Jenkins
 
