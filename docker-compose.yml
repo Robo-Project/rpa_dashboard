@@ -90,6 +90,7 @@ services:
             - '4000:4000'
         volumes:
             - ./jenkins-api-token:/jenkins-api-token
+            - ./certs:/certs
         env_file:
             - backend.env
 
