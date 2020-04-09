@@ -2,7 +2,7 @@
 - hosts: all  
   gather_facts: no 
   vars:
-    source_directory: ./rpa_dashboard
+    source_directory: ./rpa_server
     jenkins_url: jenkins.rpaboard.xyz 
     grafana_url: www.rpaboard.xyz
     backend_url: https://backend.rpaboard.xyz
