@@ -6,6 +6,10 @@
     jenkins_url: jenkins.rpaboard.xyz 
     grafana_url: www.rpaboard.xyz
     backend_url: https://backend.rpaboard.xyz
+    pubkey_cert_path: /etc/letsencrypt/live/rpaboard.xyz/fullchain.pem
+    privkey_cert_path: /etc/letsencrypt/live/rpaboard.xyz/privkey.pem
+    email: no-email-set
+    domain_list: rpaboard.xyz www.rpaboard.xyz jenkins.rpaboard.xyz backend.rpaboard.xyz
   tasks:
   - name: Pull/Update repository
     git:
@@ -36,6 +40,8 @@
       jenkins_url: jenkins.localhost
       grafana_url: localhost
       backend_url: backend.localhost
+      pubkey_cert_path: /etc/nginx/certs/robo.crt
+      privkey_cert_path: /etc/nginx/certs/robo.key
     template:
       src: ./nginx.conf
       dest: "{{ source_directory }}/nginx.conf"
@@ -55,3 +61,8 @@
       dest: "{{ source_directory }}/backend.env"
       mode: '0400'
     when: ansible_host == '127.0.0.1'
+  - name: Create certbot configuration
+    template:
+      src: ./init-letsencrypt.sh
+      dest: "{{ source_directory }}/init-letsencrypt.sh"
+    when: ansible_host != '127.0.0.1'

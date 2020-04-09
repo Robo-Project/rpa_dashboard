@@ -20,11 +20,13 @@ Run all commands inside project directory
     # setup in localhost
     ansible-playbook site.yml -i hosts.yml --connection=local --limit localhost
 
-The source directory i.e the directory where the latest version of the app will be pulled and setup in is by default ./rpa_dasbhoard. You can overwrite this with the the extra-vars flag.
+The source directory i.e the directory where the latest version of the app will be pulled and setup in is by default ./rpa_server. You can overwrite this with the the extra-vars flag.
     
     ansible-playbook site.yml -i hosts.yml -u [username] --extra-vars="source_directory=/my_folder"
 
 After setup navigate to the source directory and run `docker-compose up`.
+
+If you are setuping to webserver, navigate to source directory and run `./init-letsencrypt.sh` as root-user.
 
 Connect to `localhost` or your domain root. Log in to Grafana to view panels.
 
