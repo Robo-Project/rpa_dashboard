@@ -1,5 +1,2 @@
 ---
 build_dir: ./build
-jenkins_url: jenkins.rpaboard.xyz 
-grafana_url: www.rpaboard.xyz
-backend_url: https://backend.rpaboard.xyz
