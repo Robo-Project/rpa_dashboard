@@ -31,31 +31,11 @@
       src: nginx.template
       dest: "{{ build_dir }}/nginx.conf"
       mode: '0400'
-    when: ansible_host != '127.0.0.1'
-  - name: Create nginx configuration for localhost
-    vars:
-      jenkins_url: jenkins.localhost
-      grafana_url: localhost
-      backend_url: backend.localhost
-    template:
-      src: nginx.template
-      dest: "{{ build_dir }}/nginx.conf"
-      mode: '0400'
-    when: ansible_host == '127.0.0.1'
   - name: Create backend configuration
     template:
       src: backend.vault
       dest: "{{ build_dir }}/backend.env"
       mode: '0400'
-    when: ansible_host != '127.0.0.1'
-  - name: Create backend configuration for localhost
-    vars:
-      backend_url: https://backend.localhost
-    template:
-      src: backend.vault
-      dest: "{{ build_dir }}/backend.env"
-      mode: '0400'
-    when: ansible_host == '127.0.0.1'
   - name: Copy docker-compose file to server
     copy:
       src: docker-compose.yml
