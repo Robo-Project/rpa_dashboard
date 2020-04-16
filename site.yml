@@ -17,11 +17,6 @@
     args:
       chdir: "{{ build_dir }}/certs"
       creates: "{{ build_dir }}/robo.crt"
-  - name: Create postgres.env 
-    copy:
-      src: postgres.vault
-      dest: "{{ build_dir }}/postgres.env"
-      mode: '0400'
   - name: Create jenkins api token file
     file: 
       path: "{{ build_dir }}/jenkins-api-token"
@@ -31,10 +26,10 @@
       src: nginx.template
       dest: "{{ build_dir }}/nginx.conf"
       mode: '0400'
-  - name: Create backend configuration
+  - name: Create env-file
     template:
-      src: backend.vault
-      dest: "{{ build_dir }}/backend.env"
+      src: .env
+      dest: "{{ build_dir }}/.env"
       mode: '0400'
   - name: Copy docker-compose file to server
     copy:

@@ -1,2 +1,0 @@
-BACKTOKEN=sekret123
-BACKURL=https://{{ backend_url }}
