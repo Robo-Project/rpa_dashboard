@@ -1,57 +1,37 @@
 ---
 - hosts: all  
   gather_facts: no 
-  vars:
-    source_directory: ./rpa_dashboard
-    jenkins_url: jenkins.rpaboard.xyz 
-    grafana_url: www.rpaboard.xyz
-    backend_url: https://backend.rpaboard.xyz
+  vars_files:
+    - vars.yml
   tasks:
-  - name: Pull/Update repository
-    git:
-      repo: https://github.com/Robo-Project/rpa_dashboard.git
-      dest: "{{ source_directory }}"
+  - name: Ensure cert-directory exists
+    file:
+      path: "{{ build_dir }}/certs"
+      state: directory
+  - name: Copy cert-script to server
+    copy:
+      src: certs/create_certs.sh
+      dest: "{{ build_dir }}/certs/create_certs.sh"
   - name: Generate certificates
     shell: sh create_certs.sh 
     args:
-      chdir: "{{ source_directory }}/certs"
-      creates: robo.crt
-  - name: Create postgres.env 
-    copy:
-      src: postgres.vault
-      dest: "{{ source_directory }}/postgres.env"
-      mode: '0400'
+      chdir: "{{ build_dir }}/certs"
+      creates: "{{ build_dir }}/robo.crt"
   - name: Create jenkins api token file
     file: 
-      path: "{{ source_directory }}/jenkins-api-token"
+      path: "{{ build_dir }}/jenkins-api-token"
       state: touch
   - name: Create nginx configuration
     template:
-      src: ./nginx.conf
-      dest: "{{ source_directory }}/nginx.conf"
+      src: nginx.template
+      dest: "{{ build_dir }}/nginx.conf"
       mode: '0400'
-    when: ansible_host != '127.0.0.1'
-  - name: Create nginx configuration for localhost
-    vars:
-      jenkins_url: jenkins.localhost
-      grafana_url: localhost
-      backend_url: backend.localhost
+  - name: Create env-file
     template:
-      src: ./nginx.conf
-      dest: "{{ source_directory }}/nginx.conf"
+      src: .env
+      dest: "{{ build_dir }}/.env"
       mode: '0400'
-    when: ansible_host == '127.0.0.1'
-  - name: Create backend configuration
-    template:
-      src: ./backend.vault
-      dest: "{{ source_directory }}/backend.env"
-      mode: '0400'
-    when: ansible_host != '127.0.0.1'
-  - name: Create backend configuration for localhost
-    vars:
-      backend_url: https://backend.localhost
-    template:
-      src: ./backend.vault
-      dest: "{{ source_directory }}/backend.env"
-      mode: '0400'
-    when: ansible_host == '127.0.0.1'
+  - name: Copy docker-compose file to server
+    copy:
+      src: docker-compose.yml
+      dest: "{{ build_dir }}/docker-compose.yml"
