@@ -139,3 +139,9 @@ Configure nginx
 
 Create 'jenkins-api-token' file on rpa_dashboard root directory. Leave the file empty for now.
 ```
+
+
+### Problems related with DbBot-SQLalchemy
+
+DbBot proved not to be suitable for saving task related data. This is why we had to create our own dbsaver, that saves required data from the task. More about that [here](/documentation/dbbotreport.md)
+
