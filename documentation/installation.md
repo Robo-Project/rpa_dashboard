@@ -26,6 +26,7 @@ The setup will create `build` directory and copy necessary files there. If you w
     
     ansible-playbook site.yml -i hosts.yml -u [username] --extra-vars="build_dir=/my_folder"
 
+- Navigate into build-folder and run `docker-compose up`
 - Proceed to setup configuration.
 
 ## Configuration
