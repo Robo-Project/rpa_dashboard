@@ -24,7 +24,7 @@ Run all commands inside project directory
 
 The setup will create `build` directory and copy necessary files there. If you want, you can manually choose the directory with the the extra-vars flag:
     
-    ansible-playbook site.yml -i hosts.yml -u [username] --extra-vars="source_directory=/my_folder"
+    ansible-playbook site.yml -i hosts.yml -u [username] --extra-vars="build_dir=/my_folder"
 
 - Proceed to setup configuration.
 
