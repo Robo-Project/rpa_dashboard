@@ -1,4 +1,4 @@
-# Architechture
+# Architecture
 
 ## Docker
 The main component in this project is docker.
