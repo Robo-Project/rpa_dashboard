@@ -26,12 +26,12 @@ The setup will create `build` directory and copy necessary files there. If you w
     
     ansible-playbook site.yml -i hosts.yml -u [username] --extra-vars="build_dir=/my_folder"
 
-- Navigate into build-folder and run `docker-compose up`
 - Proceed to setup configuration.
 
 ## Configuration
 
 If you are using internet domain, see [Setting up Lets Encrypt](lets_encrypt.md), to setup Lets Encrypt as certificate authority.
+Do the configuration changes in the `build` directory.
 
 ### Changing the default credentials for postgres and backend
 
@@ -49,6 +49,10 @@ POSTGRES_USER is the name for the Postgres database user
 POSTGRES_PASSWORD is the password for the Postgres database user
 
 * Do not change BACKURL.
+
+Now RPA Dashboard is ready to be booted up.
+- Run `docker-compose up`
+
 
 ### Jenkins configuration
 
