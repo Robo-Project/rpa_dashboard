@@ -1,5 +1,7 @@
 # DbBot report
 
+## Found problems
+
 Following problems were found when trying to save task related data with [DbBot-sqlalchemy](https://github.com/pbylicki/DbBot-SQLAlchemy). It is a fork from the original [dbbot](https://github.com/robotframework/DbBot)
 
 Problems found when trying to log task related data with DbBot:
@@ -27,3 +29,25 @@ postgres           | 2020-04-15 11:14:03.261 EEST [1576] STATEMENT:  INSERT INTO
 Same occurs atleast with "unique_tests", "unique_keywords" and "unique arguments".
 
 When continuously logging data from tasks, the whole log window will be filled with such errors.
+
+## Solutions
+
+Our solution to the first problem was following:
+
+We created a separate databasesaver that creates a table for the fields in the task that we want to save and makes a connection to task metadata created by DbBot by foreign key to test_runs table. We are able to identify the correct test_runs row by calculating a sha1 hash of the source output.xml file using the same algorithm as dbbot uses.
+
+```
+def make_hash(xml_file):
+    block_size = 68157440
+    hasher = sha1()
+    with open(xml_file, 'rb') as f:
+        chunk = f.read(block_size)
+        while len(chunk) > 0:
+            hasher.update(chunk)
+            chunk = f.read(block_size)
+    return hasher.hexdigest()
+```
+
+For the task metadata to be separable from other tasks, this task **must** be run separately on its own robo-file. It is because foreign key is to test_runs and test_runs row presents one single robo-file.
+
+Latter problem remains unsolved.
