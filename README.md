@@ -21,6 +21,19 @@ It uses open source software and integrates everything smootly into one customiz
 ## How it all works?
 [Architecture](documentation/architecture.md)
 
+## Processes and where you can find them
+Nginx redirects the url to correct local address.
+
+| Process          | Url               | local port | open port |
+| ---------------- | ----------------- | ---------- | --------- |
+| Grafana          | <domain>/         | 3000       |           |
+| Jenkins          | jenkins.<domain>/ | 8080       |           |
+| Backend          | backend.<domain>/ | 4000       |           |
+| Postgres         |                   | 5432       |           |
+| Docker in Docker |                   | 2376       |           |
+| Watchtower       |                   |            |           |
+| Nginx            |                   | 80, 443    | 80, 443   |
+
 ### Problems related with DbBot-SQLalchemy
 
 DbBot proved not to be suitable for saving task related data. This is why we had to create our own dbsaver, that saves required data from the task. More about that [here](documentation/dbbotreport.md)
