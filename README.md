@@ -38,3 +38,12 @@ Nginx redirects the url to correct local address.
 
 DbBot proved not to be suitable for saving task related data. This is why we had to create our own dbsaver, that saves required data from the task. More about that [here](documentation/dbbotreport.md)
 
+## Playbooks
+
+#### shutdown.yml
+
+Kills and removes all containers. Run site.yml to restart app.
+
+#### nuke.yml
+
+Kill and removes all containers and volumes. Deletes all files used by the application. Run only if you want to reset.
