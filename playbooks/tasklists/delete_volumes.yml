@@ -1,0 +1,16 @@
+- name: Delete postgres volume
+  docker_volume:
+    name: "{{ postgres_volume_name }}"
+    state: absent
+- name: Delete jenkins volume
+  docker_volume:
+    name: "{{ jenkins_volume_name }}"
+    state: absent
+- name: Delete cert volume
+  docker_volume:
+    name: "{{ certs_volume_name }}"
+    state: absent
+- name: Delete grafana volume
+  docker_volume:
+    name: "{{ grafana_volume_name }}"
+    state: absent

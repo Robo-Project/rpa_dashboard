@@ -1,0 +1,27 @@
+---
+- hosts: all
+  vars:
+    workdir: ".."
+  vars_files:
+  - "{{ workdir }}/vars.yml"
+  gather_facts: no
+  tasks:
+  - name: Delete containers
+    import_tasks: tasklists/delete_containers.yml
+  - name: Delete volumes
+    import_tasks: tasklists/delete_volumes.yml
+
+  - name: Delete docker env-file
+    file:
+      path: "{{ workdir }}/.env"
+      state: absent
+  - name: Delete jenkins-api-token
+    file:
+      path: "{{ workdir }}/jenkins-api-token"
+      state: absent
+  - name: Delete nginx.conf
+    file:
+      path: "{{ workdir }}/nginx.conf"
+      state: absent
+  
+ 

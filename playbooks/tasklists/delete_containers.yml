@@ -1,0 +1,24 @@
+- name: Shutdown grafana
+  docker_container:
+    name: "{{ grafana_cont_name }}"
+    state: absent
+- name: Shutdown backend
+  docker_container:
+    name: "{{ backend_cont_name }}"
+    state: absent
+- name: Shutdown jenkins
+  docker_container:
+    name: "{{ jenkins_cont_name }}"
+    state: absent
+- name: Shutdown docker in docker
+  docker_container:
+    name: "{{ dind_cont_name }}"
+    state: absent
+- name: Shutdown postgres
+  docker_container:
+    name: "{{ postgres_cont_name }}"
+    state: absent
+- name: Shutdown nginx
+  docker_container:
+    name: "{{ nginx_cont_name }}"
+    state: absent

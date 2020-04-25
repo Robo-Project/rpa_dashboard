@@ -1,2 +1,14 @@
 ---
 build_dir: ./build
+
+jenkins_cont_name: jenkins
+grafana_cont_name: grafana
+postgres_cont_name: postgres
+backend_cont_name: backend
+nginx_cont_name: nginx
+dind_cont_name: jenkins-docker
+
+grafana_volume_name: grafana-storage
+jenkins_volume_name: jenkins-data
+certs_volume_name: jenkins-docker-certs
+postgres_volume_name: database
