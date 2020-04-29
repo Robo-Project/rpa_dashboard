@@ -26,9 +26,9 @@ Nginx redirects the url to correct local address.
 
 | Process          | Url               | local port | open port |
 | ---------------- | ----------------- | ---------- | --------- |
-| Grafana          | <domain>/         | 3000       |           |
-| Jenkins          | jenkins.<domain>/ | 8080       |           |
-| Backend          | backend.<domain>/ | 4000       |           |
+| Grafana          | domain/           | 3000       |           |
+| Jenkins          | jenkins.domain/   | 8080       |           |
+| Backend          | backend.domain/   | 4000       |           |
 | Postgres         |                   | 5432       |           |
 | Docker in Docker |                   | 2376       |           |
 | Watchtower       |                   |            |           |
